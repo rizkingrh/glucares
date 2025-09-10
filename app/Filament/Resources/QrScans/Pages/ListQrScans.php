@@ -15,7 +15,6 @@ class ListQrScans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
             Action::make('scanQr')
                 ->label('Scan QR Code')
                 ->icon(Heroicon::OutlinedQrCode)

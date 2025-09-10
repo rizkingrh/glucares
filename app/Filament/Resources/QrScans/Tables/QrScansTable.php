@@ -29,6 +29,7 @@ class QrScansTable
                     ->dateTime()
                     ->sortable(),
             ])
+            ->defaultSort('scanned_at', 'desc')
             ->filters([
                 //
             ])

@@ -11,9 +11,9 @@ use Filament\Support\Icons\Heroicon;
 use App\Filament\Resources\QrScans\Pages\EditQrScan;
 use App\Filament\Resources\QrScans\Pages\ViewQrScan;
 use App\Filament\Resources\QrScans\Pages\ListQrScans;
-use App\Filament\Resources\QrScans\Pages\QrScannerPage;
 use App\Filament\Resources\QrScans\Pages\CreateQrScan;
 use App\Filament\Resources\QrScans\Schemas\QrScanForm;
+use App\Filament\Resources\QrScans\Pages\QrScanner;
 use App\Filament\Resources\QrScans\Tables\QrScansTable;
 use App\Filament\Resources\QrScans\Schemas\QrScanInfolist;
 
@@ -55,9 +55,9 @@ class QrScanResource extends Resource
         return [
             'index' => ListQrScans::route('/'),
             'create' => CreateQrScan::route('/create'),
+            'scanner' => QrScanner::route('/scanner'),
             'view' => ViewQrScan::route('/{record}'),
             'edit' => EditQrScan::route('/{record}/edit'),
-            'scanner' => QrScannerPage::route('/scanner'),
         ];
     }
 }

@@ -31,6 +31,7 @@ class PatientsTable
                 TextColumn::make('email')->label('Email')->searchable(),
                 TextColumn::make('created_at')->label('Created At')->dateTime()->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('marital_status')
                     ->options([
