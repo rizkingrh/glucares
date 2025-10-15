@@ -24,6 +24,10 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->brandName('Glucares')
+            ->brandLogo(asset('img/logo-glucares.png'))
+            ->darkModeBrandLogo(asset('img/logo-glucares-dark.png'))
+            ->brandLogoHeight('2rem')
             ->default()
             ->id('admin')
             ->path('admin')
