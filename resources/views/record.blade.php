@@ -86,6 +86,10 @@
                         class="text-gray-700 hover:text-medical-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
                     <a href="#about"
                         class="text-gray-700 hover:text-medical-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                    <a href="/admin"
+                        class="bg-medical-600 hover:bg-medical-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        <i class="fas fa-user-md mr-2"></i>Admin Login
+                    </a>
                 </div>
             </div>
         </div>
