@@ -28,7 +28,7 @@ class TemporaryScanController extends Controller
             $scansData = $temporaryScans->map(function ($scan) {
                 return [
                     'patient_id' => $scan->patient_id,
-                    'patient' => $scan->patient ?? null,
+                    'patient_name' => $scan->patient->name,
                 ];
             });
             

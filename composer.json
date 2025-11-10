@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "4.0",
+        "flowframe/laravel-trend": "^0.4.0",
         "hidehalo/nanoid-php": "^2.0",
         "intervention/image": "^3.11",
         "laravel/framework": "^12.0",
