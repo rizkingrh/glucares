@@ -1,6 +1,6 @@
 <x-filament-panels::page>
-    <div class="flex flex-col items-center space-y-4">
-        <div id="qr-reader" class="rounded border w-full max-w-md" style="min-height: 400px;"></div>
+    <div class="flex flex-col items-center space-y-4 mx-auto" style="width: 50%;">
+        <div id="qr-reader" class="rounded border w-full" style="min-height: 300px;"></div>
         <p id="qr-status" class="text-sm text-gray-500">Memuat kamera...</p>
     </div>
 
@@ -16,7 +16,7 @@
 
             function onScanSuccess(decodedText, decodedResult) {
                 updateStatus("QR Code berhasil dipindai! Memproses...");
-                
+
                 // Stop scanner
                 qrCodeScanner.stop().then(() => {
                     // Kirim ke backend via fetch API
@@ -51,15 +51,15 @@
 
             // Start QR scanner
             qrCodeScanner = new Html5Qrcode("qr-reader");
-            
+
             Html5Qrcode.getCameras().then(devices => {
                 if (devices && devices.length) {
                     updateStatus("Kamera ditemukan, memulai scanner...");
-                    
+
                     // Use back camera if available, otherwise use first camera
                     let cameraId = devices[0].id;
                     devices.forEach(device => {
-                        if (device.label.toLowerCase().includes('back') || 
+                        if (device.label.toLowerCase().includes('back') ||
                             device.label.toLowerCase().includes('environment')) {
                             cameraId = device.id;
                         }
@@ -67,7 +67,10 @@
 
                     const config = {
                         fps: 10,
-                        qrbox: { width: 500, height: 500 },
+                        qrbox: {
+                            width: 250,
+                            height: 250
+                        },
                         aspectRatio: 1.0
                     };
 
