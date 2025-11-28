@@ -82,6 +82,53 @@ class MqttService
     }
 
     /**
+     * Subscribe to a topic and execute callback for each message
+     */
+    public function subscribe(string $topic, callable $callback, int $qos = 0)
+    {
+        if (!$this->connect()) {
+            return false;
+        }
+
+        try {
+            Log::info("Subscribing to MQTT topic: {$topic}");
+            
+            $this->client->subscribe($topic, function ($receivedTopic, $message) use ($callback) {
+                Log::info("MQTT message received on topic: {$receivedTopic}", ['message' => $message]);
+                
+                // Decode JSON message
+                $data = json_decode($message, true);
+                if ($data === null) {
+                    Log::error('Failed to decode MQTT message: ' . $message);
+                    // Still call callback with raw message for debugging
+                    call_user_func($callback, ['raw_message' => $message, 'decode_error' => true], $receivedTopic);
+                    return;
+                }
+                
+                // Execute callback with decoded data
+                call_user_func($callback, $data, $receivedTopic);
+            }, $qos);
+
+            // Keep the connection alive and listen for messages
+            $this->client->loop(true);
+            
+        } catch (\Exception $e) {
+            Log::error('MQTT Subscribe failed: ' . $e->getMessage());
+            return false;
+        } finally {
+            $this->disconnect();
+        }
+    }
+
+    /**
+     * Subscribe to glucares/measurement topic
+     */
+    public function subscribeMeasurements(callable $callback)
+    {
+        return $this->subscribe('glucares/measurement', $callback);
+    }
+
+    /**
      * Publish patient scan data to glucares/patient topic
      */
     public function publishPatientScan(array $patientData)
