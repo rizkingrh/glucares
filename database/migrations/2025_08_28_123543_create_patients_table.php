@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
+            $table->string('nik', 20)->unique();
             $table->date('date_of_birth');
-            $table->enum('marital_status', ['single', 'married']);
+            $table->enum('gender', ['Male', 'Female']);
             $table->text('address');
             $table->string('phone_number', 20);
             $table->string('email')->unique();

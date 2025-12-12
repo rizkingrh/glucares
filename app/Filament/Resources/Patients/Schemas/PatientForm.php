@@ -28,6 +28,14 @@ class PatientForm
                                     ->maxLength(255)
                                     ->placeholder('Enter patient\'s full name')
                                     ->columnSpan(2),
+
+                                TextInput::make('nik')
+                                    ->label('NIK')
+                                    ->required()
+                                    ->unique(ignoreRecord: true)
+                                    ->placeholder('Enter patient\'s NIK')
+                                    ->length(16)
+                                    ->columnSpan(2),
                                 
                                 DatePicker::make('date_of_birth')
                                     ->label('Date of Birth')
@@ -38,14 +46,14 @@ class PatientForm
                                     ->placeholder('Select birth date')
                                     ->columnSpan(1),
                                 
-                                Select::make('marital_status')
-                                    ->label('Marital Status')
+                                Select::make('gender')
+                                    ->label('Gender')
                                     ->required()
                                     ->options([
-                                        'Single' => 'Single',
-                                        'Married' => 'Married',
+                                        'Male' => 'Male',
+                                        'Female' => 'Female',
                                     ])
-                                    ->placeholder('Select marital status')
+                                    ->placeholder('Select gender')
                                     ->columnSpan(1),
                             ]),
                     ]),

@@ -13,21 +13,16 @@ class QrCodeController extends Controller
 {
     public function downloadPatientQrCode(Patient $patient)
     {
-        $qrCodeDir = public_path('qr-code');
-        if (!File::exists($qrCodeDir)) {
-            File::makeDirectory($qrCodeDir, 0755, true);
-        }
-
-        $svg = QrCode::format('svg')
+        // Generate QR code SVG
+        $qrCodeSvg = QrCode::format('svg')
             ->size(300)
             ->margin(2)
             ->generate($patient->id);
 
-        $filePath = public_path("qr-code/patient-qr-{$patient->id}.svg");
-        file_put_contents($filePath, $svg);
-
-        return response()->download($filePath, "patient-qr-{$patient->id}.svg", [
-            'Content-Type' => 'image/svg+xml',
+        // Pass data to the printable view
+        return view('patient-qr-card', [
+            'patient' => $patient,
+            'qrCodeSvg' => $qrCodeSvg,
         ]);
     }
 }

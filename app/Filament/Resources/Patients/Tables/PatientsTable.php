@@ -9,6 +9,7 @@ use Filament\Actions\ActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Support\Icons\Heroicon;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Schemas\Components\Flex;
 use Filament\Schemas\Components\Grid;
 use Filament\Actions\DeleteBulkAction;
@@ -25,8 +26,9 @@ class PatientsTable
         return $table
             ->columns([
                 TextColumn::make('name')->label('Name')->searchable()->sortable(),
+                TextColumn::make('nik')->label('NIK')->searchable()->sortable(),
                 TextColumn::make('date_of_birth')->label('Date of Birth')->date()->sortable(),
-                TextColumn::make('marital_status')->label('Marital Status')->colors(['primary' => 'Single', 'success' => 'Married']),
+                TextColumn::make('gender')->label('Gender')->colors(['primary' => 'Male', 'success' => 'Female']),
                 TextColumn::make('address')->label('Address')->limit(25)->wrap(),
                 TextColumn::make('phone_number')->label('Phone Number')->searchable(),
                 TextColumn::make('email')->label('Email')->searchable(),
@@ -43,6 +45,7 @@ class PatientsTable
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),
+                    DeleteAction::make(),
                     Action::make('generateQrCode')
                         ->label('QR Code')
                         ->color('success')

@@ -18,10 +18,22 @@ class Patient extends Model
     protected static function booted()
     {
         static::creating(function ($model) {
-            if (empty($model->id)) {
-                $nanoid = (new Client())->generateId(20);
-                $model->id = 'patient-'. $nanoid;
+            // Ambil ID terakhir yang memiliki prefix tersebut
+            $last = self::where('id', 'LIKE', 'patient-puskesmas-cibeber-%')
+                ->orderBy('id', 'desc')
+                ->first();
+
+            // Tentukan nomor increment berikutnya
+            if ($last) {
+                // Ambil angka paling belakang
+                $lastNumber = (int) str_replace('patient-puskesmas-cibeber-', '', $last->id);
+                $nextNumber = $lastNumber + 1;
+            } else {
+                $nextNumber = 1;
             }
+
+            // Set ID baru
+            $model->id = 'patient-puskesmas-cibeber-' . $nextNumber;
         });
     }
 }
